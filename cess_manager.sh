@@ -45,24 +45,15 @@ function install_cess() {
     # 安装CESS Node管理工具
     sudo ./install.sh
 
-    # 配置CESS节点
-    sudo cess config set << EOF
-authority
-cess
-19999
-dcap
-Full
-# 输入控制器账户的助记词
-请输入您的助记词
-EOF
-
-    echo "CESS node installed and configured."
-
-    # 确保cess命令在PATH中
+    # 将cess命令路径添加到环境变量
     if ! command -v cess &> /dev/null; then
         echo "CESS command not found. Adding it to PATH."
-        export PATH=$PATH:/usr/local/bin/cess  # 确保命令路径正确
+        export PATH=$PATH:/usr/local/bin
+        echo 'export PATH=$PATH:/usr/local/bin' >> ~/.bashrc
+        source ~/.bashrc
     fi
+
+    echo "CESS node installed and configured."
 }
 
 # 启动CESS节点
@@ -122,6 +113,11 @@ function show_menu() {
     echo "====================================="
 }
 
+# 执行必要的系统检查和客户端安装
+check_requirements
+check_public_ip
+install_cess
+
 # 主循环
 while true; do
     show_menu
@@ -154,4 +150,5 @@ while true; do
             ;;
     esac
 done
+
 
