@@ -38,14 +38,11 @@ function install_cess() {
     echo "Installing CESS node management tool..."
 
     # 下载CESS Node管理工具
-    wget https://github.com/CESSProject/cess-nodeadm/archive/refs/tags/v0.5.7.tar.gz
-    tar -xvf v0.5.7.tar.gz
-    cd cess-nodeadm-0.5.7
+    wget https://github.com/CESSProject/cess-nodeadm/releases/download/v0.5.7/cess-nodeadm-v0.5.7-linux-amd64.tar.gz
+    tar -xvf cess-nodeadm-v0.5.7-linux-amd64.tar.gz
+    sudo mv cess-nodeadm /usr/local/bin/
 
-    # 安装CESS Node管理工具
-    sudo ./install.sh
-
-    # 将cess命令路径添加到环境变量
+    # 确保CESS命令在PATH中
     if ! command -v cess &> /dev/null; then
         echo "CESS command not found. Adding it to PATH."
         export PATH=$PATH:/usr/local/bin
@@ -92,10 +89,9 @@ function stop_and_remove() {
 # 更新CESS客户端
 function update_cess() {
     echo "Updating CESS client..."
-    wget https://github.com/CESSProject/cess-nodeadm/archive/refs/tags/v0.5.7.tar.gz
-    tar -xvf v0.5.7.tar.gz
-    cd cess-nodeadm-0.5.7
-    sudo ./install.sh --skip-dep
+    wget https://github.com/CESSProject/cess-nodeadm/releases/download/v0.5.7/cess-nodeadm-v0.5.7-linux-amd64.tar.gz
+    tar -xvf cess-nodeadm-v0.5.7-linux-amd64.tar.gz
+    sudo mv cess-nodeadm /usr/local/bin/
 }
 
 # 菜单
@@ -150,5 +146,6 @@ while true; do
             ;;
     esac
 done
+
 
 
