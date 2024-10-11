@@ -57,6 +57,12 @@ Full
 EOF
 
     echo "CESS node installed and configured."
+
+    # 确保cess命令在PATH中
+    if ! command -v cess &> /dev/null; then
+        echo "CESS command not found. Adding it to PATH."
+        export PATH=$PATH:/usr/local/bin/cess  # 确保命令路径正确
+    fi
 }
 
 # 启动CESS节点
@@ -148,3 +154,4 @@ while true; do
             ;;
     esac
 done
+
