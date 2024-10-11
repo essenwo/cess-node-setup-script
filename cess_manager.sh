@@ -24,6 +24,15 @@ function check_requirements() {
     sudo systemctl enable --now docker
 }
 
+# 检查公网IP
+function check_public_ip() {
+    echo "Checking for static public IP..."
+    public_ip=$(curl -4 ifconfig.co)
+    echo "Your public IP is: $public_ip"
+    echo "Please ensure the IP address is static and not behind a NAT. Press Enter to continue or Ctrl+C to exit."
+    read -p ""
+}
+
 # 安装CESS客户端
 function install_cess() {
     echo "Installing CESS node management tool..."
